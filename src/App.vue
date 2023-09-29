@@ -1,85 +1,64 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+// import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+  <!-- <header>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
-  </header>
+  </header> -->
 
-  <RouterView />
+  <the-header title="Remember Resources"></the-header>
+  <stored-resources :resources="storedResources"></stored-resources>
+
+  <!-- <RouterView /> -->
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+<script>
+import StoredResources from './components/learning-resources/StoredResources.vue';
+import TheHeader from './components/layouts/TheHeader.vue';
+export default {
+  componentes: {
+    'stored-resources': StoredResources,
+    'the-header': TheHeader
+  },
+  data() {
+    return {
+      storedResources: [
+        {
+          id: 'id-1',
+          title: 'Official Vue Guide',
+          description: 'This is the official guide.',
+          link: 'https://vuejs.org'
+        },
+        {
+          id: 'id-2',
+          title: 'Google',
+          description: 'Just learn to Google',
+          link: 'https://google.org'
+        }
+      ]
+    }
   }
+}
+</script>
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+html {
+  font-family: 'Roboto', sans-serif;
+}
 
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+body {
+  margin: 0;
 }
 </style>
