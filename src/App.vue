@@ -13,36 +13,19 @@
   </header> -->
 
   <the-header title="Remember Resources"></the-header>
-  <stored-resources :resources="storedResources"></stored-resources>
+  <the-resource></the-resource>
 
   <!-- <RouterView /> -->
 </template>
 
 <script>
-import StoredResources from './components/learning-resources/StoredResources.vue';
-import TheHeader from './components/layouts/TheHeader.vue';
+import TheHeader from './components/layouts/TheHeader.vue'
+import TheResource from './components/learning-resources/TheResource.vue'
+
 export default {
   componentes: {
-    'stored-resources': StoredResources,
-    'the-header': TheHeader
-  },
-  data() {
-    return {
-      storedResources: [
-        {
-          id: 'id-1',
-          title: 'Official Vue Guide',
-          description: 'This is the official guide.',
-          link: 'https://vuejs.org'
-        },
-        {
-          id: 'id-2',
-          title: 'Google',
-          description: 'Just learn to Google',
-          link: 'https://google.org'
-        }
-      ]
-    }
+    'the-header': TheHeader,
+    'the-resources': TheResource
   }
 }
 </script>
