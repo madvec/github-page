@@ -1,9 +1,18 @@
 <template>
+  <base-modal v-if="inputIsInvalid" title="Invalid Input" @close="confirmError">
+    <template #default>
+      <p>At least one input is invalid</p>
+      <p>Please chell all inputs</p>
+    </template>
+    <template #actions>
+        <base-button @click="confirmError">Close</base-button>
+    </template>
+  </base-modal>
   <base-card>
     <form @submit.prevent="submitData">
       <div class="form-control">
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" ref="titleInput"/>
+        <input type="text" name="title" id="title" ref="titleInput" />
       </div>
       <div class="form-control">
         <label for="title">Description</label>
@@ -11,7 +20,7 @@
       </div>
       <div class="form-control">
         <label for="link">Link</label>
-        <input type="url" name="link" id="link" ref="urlInput"/>
+        <input type="url" name="link" id="link" ref="urlInput" />
       </div>
       <div>
         <base-button type="submit">Add Resource</base-button>
@@ -22,16 +31,32 @@
 
 <script>
 export default {
-    inject: ['addResource'],
-    methods: {
-        submitData() {
-            const enteredTitle = this.$refs.titleInput.value;
-            const enteredDescription = this.$refs.descInput.value;
-            const enteredUrl = this.$refs.urlInput.value;
-
-            this.addResource(enteredTitle, enteredDescription, enteredUrl)
-        }
+  inject: ['addResource'],
+  data() {
+    return {
+      inputIsInvalid: false
     }
+  },
+  methods: {
+    submitData() {
+      const enteredTitle = this.$refs.titleInput.value
+      const enteredDescription = this.$refs.descInput.value
+      const enteredUrl = this.$refs.urlInput.value
+
+      if (
+        enteredTitle.trim() === '' ||
+        enteredDescription.trim() === '' ||
+        enteredUrl.trim() === ''
+      ) {
+        this.inputIsInvalid = true
+        return
+      }
+      this.addResource(enteredTitle, enteredDescription, enteredUrl)
+    },
+    confirmError () {
+        this.inputIsInvalid = false;
+    }
+  }
 }
 </script>
 
